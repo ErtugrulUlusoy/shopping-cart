@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,20 +21,15 @@ Route::get('/cart', function () {
     return view('front.cart');
 });
 
+Route::prefix('/auth')->group(function () {
 
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'perform'])->name('login.perform');
 
-Route::prefix('/admin')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
-    Route::prefix('/auth')->group(function () {
-
-        Route::get('/login', function () {
-            return view('admin.auth.login');
-        });
-
-        Route::get('/logout', function () {
-            return view('admin.auth.logout');
-        });
-    });
+Route::prefix('/admin')->middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
         return view('admin.dashboard.index');

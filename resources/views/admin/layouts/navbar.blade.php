@@ -5,9 +5,12 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}" aria-current="page" href="{{ url('/admin/dashboard') }}">Dashboard</a>
-          <a class="nav-link {{ request()->is('admin/products') ? 'active' : '' }}" aria-current="page" href="{{ url('/admin/products') }}">Ürünler</a>
+        <div class="navbar-nav me-auto">
+          <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}" href="{{ url('/admin/dashboard') }}">Dashboard</a>
+          <a class="nav-link {{ request()->is('admin/products') ? 'active' : '' }}" href="{{ url('/admin/products') }}">Ürünler</a>
+        </div>
+        <div class="">
+          <a class="nav-link" href="{{ url('auth/logout') }}">Çıkış Yap</a>
         </div>
       </div>
     </div>
