@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-end mb-3">
-<h1 class="mt-5 mb-0">Düzenle</h1>
+<h1 class="mt-5 mb-0">Yeni Ekle</h1>
 </div>
 <div class="row">
     <div class="col-12">

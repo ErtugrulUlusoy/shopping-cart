@@ -53,6 +53,10 @@ Route::prefix('/admin')->group(function () {
         Route::get('/edit', function () {
             return view('admin.products.edit');
         });
+
+        Route::get('/create', function () {
+            return view('admin.products.create');
+        });
     });
 });
 
