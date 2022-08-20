@@ -33,11 +33,6 @@ class AuthController extends Controller
         return redirect('admin');
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        return redirect()->intended();
-    }
-
     public function logout()
     {
         Session::flush();

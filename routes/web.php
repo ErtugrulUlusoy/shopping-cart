@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +16,11 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('front.home');
-});
-
-Route::get('/cart', function () {
-    return view('front.cart');
-});
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart', [CartController::class, 'addProductToCart'])->name('cart.add');
+Route::post('/cart/remove', [CartController::class, 'removeProductFromCart']);
+Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
 
 Route::prefix('/auth')->group(function () {
 
@@ -41,33 +42,10 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
 
     Route::prefix('/products')->group(function () {
 
-        Route::get('/', function () {
-            return view('admin.products.index');
-        });
+        Route::get('/', [ProductController::class, 'index']);
+        Route::get('/delete/{id}', [ProductController::class, 'delete']);
 
-        Route::get('/edit', function () {
-            return view('admin.products.edit');
-        });
-
-        Route::get('/create', function () {
-            return view('admin.products.create');
-        });
+        Route::get('/create', [ProductController::class, 'create']);
+        Route::post('/create', [ProductController::class, 'createPost']);
     });
 });
-
-
-// Route::get('/', 'HomeController@index')->name('home.index');
-
-// Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
-
-//     Route::get('/admin', 'HomeController@index')->name('admin.dashboard.index');
-
-//     Route::group(['middleware' => ['guest']], function () {
-//         Route::get('/login', 'LoginController@show')->name('login.show');
-//         Route::post('/login', 'LoginController@login')->name('login.perform');
-//     });
-
-//     Route::group(['middleware' => ['auth']], function () {
-//         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
-//     });
-// });

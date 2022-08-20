@@ -11,21 +11,23 @@
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Görsel</th>
                 <th scope="col">Adı</th>
                 <th scope="col">Fiyat</th>
-                <th scope="col">İşlem</th>
+                <th scope="col" class="text-center">İşlem</th>
               </tr>
             </thead>
             <tbody>
+              @foreach ($products as $product)
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td><a href="{{ url('admin/products/edit/1') }}" class="btn btn-primary">Düzenle</a></td>
+                <td><img src="{{ $product->firstImage->url ?? '/images/no-image.jpg' }}" width="50" height="50" /></td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->price }}</td>
+                <td class="text-center">
+                  <a href="{{ url('admin/products/delete/'. $product->id) }}" class="btn btn-danger">Sil</a>
+                </td>
               </tr>
+              @endforeach
             </tbody>
           </table>
     </div>
